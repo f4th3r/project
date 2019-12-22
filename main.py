@@ -31,7 +31,7 @@ def user_name(user_name):
     data = request.get_json()
     dateti = datetime.today()
     if not user_name.isalpha():
-        return jsonify('dont  use a numbers in username, please')
+        return jsonify({"dont  use a numbers in username, please"})
     if not datetime.strptime(data['dateOfBirth'], '%Y-%M-%d') < datetime.today():
         return jsonify('Are you from the future?')
     else:
@@ -41,7 +41,7 @@ def user_name(user_name):
                 cursor = conn.cursor()
                 cursor.execute("UPDATE user SET name=%s,birth=%s where id=1", (user_name,birthfromjson,))
                 conn.commit()
-                respone = jsonify('hello,', user_name ,' You just changed the name and birth of ID=1')
+                respone = jsonify({"message": " {} ,you just changed the name and birth of ID=1".format(user_name)})
                 respone.status_code = 204
                 return respone
                 abort()        
@@ -64,7 +64,7 @@ def user_name2(user_name2):
                 user_bd = (user_time2.month),(user_time2.day)
                 current_date = (thisday.month), (thisday.day)
                 if (user_bd) == (current_date):
-                   respone = jsonify("hello" , user_name2, "happy bday!")
+                   respone = jsonify({"mesage": "hello , {} , happy bday!".format(user_name2)})
                    respone.status_code = 200
                    cursor.close()
                 else:
@@ -74,7 +74,7 @@ def user_name2(user_name2):
                     else:
                         nextbday = datetime(thisday.year + 1,user_time2.month,user_time2.day)
                         hmdays = (nextbday - thisday).days
-                    respone = jsonify("hello",user_name2,'your bday in', hmdays, 'days')
+                    respone = jsonify({"message": "hey, {} ,your bd's in {} days".format(user_name2, hmdays)})
                     respone.status_code = 200
                     return respone
                 return respone
@@ -85,4 +85,4 @@ def user_name2(user_name2):
                 conn.close()                
                 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0', port=5000)
