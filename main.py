@@ -74,7 +74,7 @@ def user_name2(user_name2):
                     else:
                         nextbday = datetime(thisday.year + 1,user_time2.month,user_time2.day)
                         hmdays = (nextbday - thisday).days
-                    respone = jsonify("hello",user_name2,'your bday in', hmdays, 'days')
+                    respone = jsonify("hello",user_name2,'your bday in', hmdays, 'days!')
                     respone.status_code = 200
                     return respone
                 return respone
