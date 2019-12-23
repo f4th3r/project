@@ -29,7 +29,7 @@ def users():
 @app.route('/update/<string:user_name>',methods=['PUT'])
 def user_name(user_name):
     data = request.get_json()
-    dateti = datetime.today()
+    datetime = datetime.today()
     if not user_name.isalpha():
         return jsonify({"dont  use a numbers in username, please"})
     if not datetime.strptime(data['dateOfBirth'], '%Y-%M-%d') < datetime.today():
